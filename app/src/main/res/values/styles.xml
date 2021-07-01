@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyActionBar" parent="Widget.MaterialComponents.Light.ActionBar.Solid">
+        <item name="background">?appBarBackgroundColor</item>
+        <item name="titleTextColor">?appBarForegroundColor</item>
+    </style>
+
+    <style name="MyEditTextTheme">
+        <item name="colorControlNormal">?bottomLineEditText</item>
+        <item name="colorControlActivated">?blue</item>
+        <item name="android:textColorHighlight">?textHighlightColor</item>
+        <item name="android:textColorHint">?placeholderColor</item>
+        <item name="android:paddingBottom">18dp</item>
+    </style>
+</resources>

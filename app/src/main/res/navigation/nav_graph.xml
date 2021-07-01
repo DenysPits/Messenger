@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/registrationFragment">
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.messenger.fragments.ChatFragment"
+        tools:layout="@layout/chat_fragment" />
+    <fragment
+        android:id="@+id/chatPreviewsFragment"
+        android:name="com.example.messenger.fragments.ChatPreviewsFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/chat_previews_fragment" >
+        <action
+            android:id="@+id/action_chatPreviewsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_chatPreviewsFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.messenger.fragments.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_chatPreviewsFragment"
+            app:destination="@id/chatPreviewsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.example.messenger.fragments.RegistrationFragment"
+        android:label="@string/registration"
+        tools:layout="@layout/registration_fragment" >
+        <action
+            android:id="@+id/action_registrationFragment_to_chatPreviewsFragment"
+            app:destination="@id/chatPreviewsFragment" />
+    </fragment>
+</navigation>

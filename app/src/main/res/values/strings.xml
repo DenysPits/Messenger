@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Messenger</string>
+    <string name="registration">Registration</string>
+    <string name="profile">Profile</string>
+    <string name="your_info">Your Info</string>
+    <string name="what_to_do">Please enter your name, tag and upload a photo.</string>
+    <string name="user_photo">User\'s photo</string>
+    <string name="name">Name</string>
+    <string name="tag">Tag</string>
+    <string name="sign_up">Sign up</string>
+</resources>
