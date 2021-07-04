@@ -1,9 +1,9 @@
-package com.example.messenger.data.db.dao
+package com.example.messenger.model.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.messenger.data.entity.User
+import com.example.messenger.model.entity.User
 
 @Dao
 interface UserDao {

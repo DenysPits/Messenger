@@ -24,5 +24,6 @@
         <item name="appBarForegroundColor">@color/white</item>
         <item name="bottomLineEditText">@color/white2</item>
         <item name="textHighlightColor">@color/grey_blue</item>
+        <item name="line">@color/black</item>
     </style>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.messenger.data.entity
+package com.example.messenger.model.entity
 
 import androidx.room.Entity
 import androidx.room.Index

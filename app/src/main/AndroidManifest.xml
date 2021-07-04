@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Messenger"
         tools:targetApi="n">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name="com.example.messenger.view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

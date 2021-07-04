@@ -1,4 +1,4 @@
-package com.example.messenger.fragment
+package com.example.messenger.view.fragment
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle

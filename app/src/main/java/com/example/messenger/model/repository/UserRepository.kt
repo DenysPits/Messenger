@@ -1,9 +1,9 @@
-package com.example.messenger.data.repository
+package com.example.messenger.model.repository
 
-import com.example.messenger.data.db.dao.UserDao
-import com.example.messenger.data.entity.User
-import com.example.messenger.data.network.MessengerApi
-import com.example.messenger.data.network.status.Status
+import com.example.messenger.model.db.dao.UserDao
+import com.example.messenger.model.entity.User
+import com.example.messenger.model.network.MessengerApi
+import com.example.messenger.model.network.status.Status
 
 class UserRepository(private val userDao: UserDao) {
     suspend fun save(user: User) {

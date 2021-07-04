@@ -3,8 +3,8 @@ package com.example.messenger.viewmodel
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.messenger.data.entity.User
-import com.example.messenger.data.repository.UserRepository
+import com.example.messenger.model.entity.User
+import com.example.messenger.model.repository.UserRepository
 import kotlinx.coroutines.runBlocking
 
 class RegistrationViewModel(private val repository: UserRepository) : ViewModel() {

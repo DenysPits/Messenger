@@ -15,4 +15,5 @@
     <attr name="appBarForegroundColor" format="reference"/>
     <attr name="bottomLineEditText" format="reference"/>
     <attr name="textHighlightColor" format="reference"/>
+    <attr name="line" format="reference"/>
 </resources>

@@ -1,9 +1,9 @@
 package com.example.messenger
 
 import android.app.Application
-import com.example.messenger.data.db.MessengerDatabase
-import com.example.messenger.data.repository.MessageRepository
-import com.example.messenger.data.repository.UserRepository
+import com.example.messenger.model.db.MessengerDatabase
+import com.example.messenger.model.repository.MessageRepository
+import com.example.messenger.model.repository.UserRepository
 
 class MessengerApplication : Application() {
     val database by lazy { MessengerDatabase.getDatabase(this) }

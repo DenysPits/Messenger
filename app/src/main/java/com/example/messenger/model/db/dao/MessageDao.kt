@@ -1,4 +1,4 @@
-package com.example.messenger.data.db.dao
+package com.example.messenger.model.db.dao
 
 import androidx.room.Dao
 

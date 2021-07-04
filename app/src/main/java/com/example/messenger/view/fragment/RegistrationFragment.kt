@@ -1,4 +1,4 @@
-package com.example.messenger.fragment
+package com.example.messenger.view.fragment
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -16,9 +16,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.example.messenger.MessengerApplication
-import com.example.messenger.data.repository.FailStatusException
-import com.example.messenger.data.repository.TagIsTakenException
 import com.example.messenger.databinding.RegistrationFragmentBinding
+import com.example.messenger.model.repository.FailStatusException
+import com.example.messenger.model.repository.TagIsTakenException
 import com.example.messenger.utils.Coder
 import com.example.messenger.viewmodel.RegistrationViewModel
 import com.example.messenger.viewmodel.RegistrationViewModelFactory

@@ -1,4 +1,4 @@
-package com.example.messenger.data.network
+package com.example.messenger.model.network
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
