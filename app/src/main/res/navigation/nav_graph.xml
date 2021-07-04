@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.example.messenger.fragments.ChatFragment"
+        android:name="com.example.messenger.fragment.ChatFragment"
         tools:layout="@layout/chat_fragment" />
     <fragment
         android:id="@+id/chatPreviewsFragment"
-        android:name="com.example.messenger.fragments.ChatPreviewsFragment"
+        android:name="com.example.messenger.fragment.ChatPreviewsFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/chat_previews_fragment" >
+        tools:layout="@layout/chat_previews_fragment">
         <action
             android:id="@+id/action_chatPreviewsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
@@ -23,20 +23,22 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.messenger.fragments.ProfileFragment"
+        android:name="com.example.messenger.fragment.ProfileFragment"
         android:label="@string/profile"
-        tools:layout="@layout/profile_fragment" >
+        tools:layout="@layout/profile_fragment">
         <action
             android:id="@+id/action_profileFragment_to_chatPreviewsFragment"
             app:destination="@id/chatPreviewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.example.messenger.fragments.RegistrationFragment"
+        android:name="com.example.messenger.fragment.RegistrationFragment"
         android:label="@string/registration"
-        tools:layout="@layout/registration_fragment" >
+        tools:layout="@layout/registration_fragment">
         <action
             android:id="@+id/action_registrationFragment_to_chatPreviewsFragment"
-            app:destination="@id/chatPreviewsFragment" />
+            app:destination="@id/chatPreviewsFragment"
+            app:popUpTo="@id/registrationFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

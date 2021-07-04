@@ -1,4 +1,4 @@
-package com.example.messenger.fragments
+package com.example.messenger.fragment
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,26 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.messenger.R
-import com.example.messenger.viewmodels.ChatViewModel
+import com.example.messenger.viewmodel.ChatPreviewsViewModel
 
-class ChatFragment : Fragment() {
+class ChatPreviewsFragment : Fragment() {
 
     companion object {
-        fun newInstance() = ChatFragment()
+        fun newInstance() = ChatPreviewsFragment()
     }
 
-    private lateinit var viewModel: ChatViewModel
+    private lateinit var viewModel: ChatPreviewsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.chat_fragment, container, false)
+        return inflater.inflate(R.layout.chat_previews_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ChatPreviewsViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
