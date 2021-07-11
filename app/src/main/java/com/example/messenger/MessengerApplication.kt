@@ -8,5 +8,5 @@ import com.example.messenger.model.repository.UserRepository
 class MessengerApplication : Application() {
     val database by lazy { MessengerDatabase.getDatabase(this) }
     val userRepository by lazy { UserRepository(database.userDao()) }
-    val messageRuntimeException by lazy { MessageRepository(database.messageDao()) }
+    val messageRepository by lazy { MessageRepository(database.messageDao()) }
 }

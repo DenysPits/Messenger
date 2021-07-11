@@ -16,4 +16,5 @@
     <attr name="bottomLineEditText" format="reference"/>
     <attr name="textHighlightColor" format="reference"/>
     <attr name="line" format="reference"/>
+    <attr name="mode" format="reference"/>
 </resources>

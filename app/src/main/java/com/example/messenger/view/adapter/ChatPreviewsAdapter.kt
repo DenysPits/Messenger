@@ -17,7 +17,7 @@ class ChatPreviewsAdapter :
     companion object {
         private val DiffCallback = object : DiffUtil.ItemCallback<ChatPreview>() {
             override fun areItemsTheSame(oldItem: ChatPreview, newItem: ChatPreview): Boolean {
-                return oldItem.name == newItem.name && oldItem.message == newItem.message
+                return oldItem.userId == newItem.userId
             }
 
             override fun areContentsTheSame(oldItem: ChatPreview, newItem: ChatPreview): Boolean {
@@ -47,9 +47,11 @@ class ChatPreviewsAdapter :
                 userName.text = chatPreview.name
                 message.text = chatPreview.message
                 val simpleDateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-                time.text = simpleDateFormat.format(Date(chatPreview.time))
+                val time = chatPreview.time
+                this.time.text =
+                    if (time > 0) simpleDateFormat.format(Date(chatPreview.time)) else ""
                 if (chatPreview.avatar.isEmpty()) {
-                    avatarLetter.text = chatPreview.name.uppercase()
+                    avatarLetter.text = chatPreview.name.take(1).uppercase(Locale.getDefault())
                 } else {
                     avatar.setImageBitmap(Coder.convertBase64ToBitmap(chatPreview.avatar))
                 }

@@ -5,9 +5,7 @@ import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.example.messenger.MessengerApplication
+import com.example.messenger.R
 import com.example.messenger.databinding.RegistrationFragmentBinding
 import com.example.messenger.model.repository.FailStatusException
 import com.example.messenger.model.repository.TagIsTakenException
@@ -32,10 +31,16 @@ class RegistrationFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         if (!viewModel.isUsersTableEmpty()) {
             val action = RegistrationFragmentDirections.actionRegistrationFragmentToChatPreviewsFragment()
             findNavController().navigate(action)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.findItem(R.id.edit_profile).isVisible = false
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onCreateView(
@@ -67,9 +72,9 @@ class RegistrationFragment : Fragment() {
                     val action = RegistrationFragmentDirections.actionRegistrationFragmentToChatPreviewsFragment()
                     findNavController().navigate(action)
                 } catch (e: TagIsTakenException) {
-                    Toast.makeText(context, "This tag is occupied by another user. Come up with another one", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.tag_is_occupied), Toast.LENGTH_SHORT).show()
                 } catch (e: FailStatusException) {
-                    Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show()
                 } catch (e: IllegalArgumentException) {
                     Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
                 }

@@ -1,3 +1,5 @@
 package com.example.messenger.model.network.status
 
-data class StatusResponse(val status: Status, val id: Long, val time: Long = 0)
+import com.google.gson.annotations.Expose
+
+data class StatusResponse(@Expose val status: Status, @Expose val id: Long, @Expose val time: Long = 0)

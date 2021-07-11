@@ -12,7 +12,7 @@ class RegistrationViewModel(private val repository: UserRepository) : ViewModel(
 
     suspend fun saveUser(name: String, tag: String, avatar: String) {
         if (validateUserInput(name, tag)) {
-            repository.save(User(name = name, tag = tag, avatar = avatar))
+            repository.saveGlobally(User(name = name, tag = tag, avatar = avatar, isMyUser = true))
         } else throw IllegalArgumentException("Invalid input. Make sure that fields are not empty or long length")
     }
 

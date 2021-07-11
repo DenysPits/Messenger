@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="MyActionBar" parent="Widget.MaterialComponents.Light.ActionBar.Solid">
-        <item name="background">?appBarBackgroundColor</item>
+    <style name="Widget.Messenger.Toolbar.Primary" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="android:background">?appBarBackgroundColor</item>
         <item name="titleTextColor">?appBarForegroundColor</item>
     </style>
 

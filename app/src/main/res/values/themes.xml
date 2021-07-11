@@ -2,14 +2,14 @@
     <!-- Base application theme. -->
     <style name="Theme.Messenger" parent="Theme.MaterialComponents.DayNight">
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/grey_light</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/blue_gloomy</item>
         <!-- Customize your theme here. -->
-        <item name="actionBarStyle">@style/MyActionBar</item>
-
+        <item name="toolbarStyle">@style/Widget.Messenger.Toolbar.Primary</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
 
 
         <item name="android:textColor">@color/grey_dark</item>
-        <item name="appBarBackgroundColor">@color/white</item>
+        <item name="appBarBackgroundColor">@color/blue</item>
         <item name="myMessageBackgroundColor">@color/blue</item>
         <item name="companionMessageBackgroundColor">@color/grey_light</item>
         <item name="backgroundMainColor">@color/white</item>
@@ -21,9 +21,10 @@
         <item name="blue">@color/blue</item>
         <item name="white">@color/white</item>
         <item name="messageTimePreviewColor">@color/grey</item>
-        <item name="appBarForegroundColor">@color/grey_dark</item>
+        <item name="appBarForegroundColor">@color/white</item>
         <item name="bottomLineEditText">@color/grey3</item>
         <item name="textHighlightColor">@color/grey_light2</item>
         <item name="line">@color/grey_light3</item>
+        <item name="mode">@drawable/ic_light_mode</item>
     </style>
 </resources>

@@ -9,4 +9,10 @@
     <string name="tag">Tag</string>
     <string name="sign_up">Sign up</string>
     <string name="user_avatar">User avatar</string>
+    <string name="new_chat">New chat</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="change_theme">Change theme</string>
+    <string name="enter_user_tag">Enter user\'s tag</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="tag_is_occupied">This tag is occupied by another user. Come up with another one</string>
 </resources>

@@ -5,15 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="?backgroundMainColor"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    tools:context=".view.fragment.RegistrationFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
-        android:paddingBottom="55dp"
-        tools:context=".view.fragment.RegistrationFragment">
+        android:paddingBottom="55dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/info_and_avatar_block"
@@ -24,33 +24,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/your_info"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/your_info"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/what_to_do"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintTop_toTopOf="parent"
+                 />
+
+            <TextView
+                android:id="@+id/what_to_do"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/what_to_do"
+                android:textColor="?plainTextColor"
+                app:layout_constraintTop_toBottomOf="@id/your_info"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/your_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/your_info"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/what_to_do"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/what_to_do"
-                    android:textColor="?plainTextColor"
-                    app:layout_constraintStart_toStartOf="@id/your_info"
-                    app:layout_constraintTop_toBottomOf="@id/your_info"
-                    app:layout_constraintWidth_percent="0.48" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintWidth_percent="0.48" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
@@ -69,6 +65,24 @@
                     android:contentDescription="@string/user_photo"
                     android:scaleType="centerCrop" />
             </androidx.cardview.widget.CardView>
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="your_info,what_to_do" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="your_info,what_to_do" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="your_info,what_to_do" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <EditText

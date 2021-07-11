@@ -4,7 +4,8 @@
     <color name="grey">#8c8d8f</color> // message text preview, message time
     <color name="grey2">#8e959b</color> // send button
     <color name="grey3">#a3acb3</color> // placeholder
-    <color name="grey_light">#f0f0f0</color> // status bar, companion message background
+    <color name="grey_light">#f0f0f0</color> companion message background
+    <color name="blue_gloomy">#426382</color>
     <color name="grey_dark">#333333</color>
     <color name="grey_light2">#cfcfcf</color> // highlight
     <color name="grey_light3">#e6e6e6</color> // line in previews

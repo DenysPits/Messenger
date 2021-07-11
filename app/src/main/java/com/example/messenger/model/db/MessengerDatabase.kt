@@ -9,7 +9,7 @@ import com.example.messenger.model.db.dao.UserDao
 import com.example.messenger.model.entity.Message
 import com.example.messenger.model.entity.User
 
-@Database(entities = [Message::class, User::class], version = 3, exportSchema = false)
+@Database(entities = [Message::class, User::class], version = 5, exportSchema = false)
 abstract class MessengerDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun messageDao(): MessageDao

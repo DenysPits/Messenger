@@ -22,7 +22,9 @@ object MessengerApi {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
-        val gson = GsonBuilder().create()
+        val gson = GsonBuilder()
+            .excludeFieldsWithoutExposeAnnotation()
+            .create()
         retrofit = Retrofit.Builder()
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
