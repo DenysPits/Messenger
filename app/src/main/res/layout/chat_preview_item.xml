@@ -70,7 +70,7 @@
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textColor="?plainTextColor"
+                android:textColor="?plainTextColor2"
                 android:textSize="17sp"
                 app:layout_constraintStart_toStartOf="@id/user_name"
                 app:layout_constraintTop_toBottomOf="@id/user_name"

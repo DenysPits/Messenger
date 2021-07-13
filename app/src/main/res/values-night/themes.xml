@@ -9,15 +9,17 @@
 
 
         <item name="android:textColor">@color/white2</item>
+        <item name="plainTextColor">@color/white2</item>
         <item name="appBarBackgroundColor">@color/blue_dark</item>
+        <item name="messageInputPanelBackground">@color/blue_dark</item>
         <item name="myMessageBackgroundColor">@color/blue_slightly_dark</item>
         <item name="companionMessageBackgroundColor">@color/blue_dark</item>
         <item name="backgroundMainColor">@color/blue_dark2</item>
         <item name="placeholderColor">@color/grey4</item>
-        <item name="sendButtonColor">@color/grey5</item>
+        <item name="attachButtonColor">@color/grey5</item>
         <item name="myMessageTimeColor">@color/blue_light</item>
         <item name="companionMessageTimeColor">@color/grey6</item>
-        <item name="plainTextColor">@color/grey_blue</item>
+        <item name="plainTextColor2">@color/grey_blue</item>
         <item name="blue">@color/blue2</item>
         <item name="white">@color/white2</item>
         <item name="messageTimePreviewColor">@color/grey_blue2</item>
@@ -25,6 +27,7 @@
         <item name="bottomLineEditText">@color/white2</item>
         <item name="textHighlightColor">@color/grey_blue</item>
         <item name="line">@color/black</item>
+        <item name="lineMessageInputPanel">@color/blue_dark</item>
         <item name="mode">@drawable/ic_dark_mode</item>
     </style>
 </resources>

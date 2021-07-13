@@ -8,7 +8,7 @@
     <color name="blue_gloomy">#426382</color>
     <color name="grey_dark">#333333</color>
     <color name="grey_light2">#cfcfcf</color> // highlight
-    <color name="grey_light3">#e6e6e6</color> // line in previews
+    <color name="grey_light3">#e6e6e6</color> // line
     
     <color name="blue_ultra_dark">#1a242e</color> // status bar
     <color name="blue_dark">#212d3b</color> // app bar background, companion message background

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="appBarBackgroundColor" format="reference"/>
+    <attr name="messageInputPanelBackground" format="reference"/>
     <attr name="myMessageBackgroundColor" format="reference"/>
     <attr name="companionMessageBackgroundColor" format="reference"/>
+    <attr name="myMessageTimeColor" format="reference"/>
     <attr name="backgroundMainColor" format="reference"/>
     <attr name="placeholderColor" format="reference"/>
-    <attr name="sendButtonColor" format="reference"/>
-    <attr name="myMessageTimeColor" format="reference"/>
+    <attr name="attachButtonColor" format="reference"/>
     <attr name="companionMessageTimeColor" format="reference"/>
     <attr name="plainTextColor" format="reference"/>
+    <attr name="plainTextColor2" format="reference"/>
     <attr name="blue" format="reference"/>
     <attr name="white" format="reference"/>
     <attr name="messageTimePreviewColor" format="reference"/>
@@ -16,5 +18,11 @@
     <attr name="bottomLineEditText" format="reference"/>
     <attr name="textHighlightColor" format="reference"/>
     <attr name="line" format="reference"/>
+    <attr name="lineMessageInputPanel" format="reference"/>
     <attr name="mode" format="reference"/>
+
+    <attr name="messageBackground" format="reference"/>
+    <attr name="messageBias" format="float"/>
+    <attr name="messageTextColor" format="reference"/>
+    <attr name="messageTimeColor" format="reference"/>
 </resources>

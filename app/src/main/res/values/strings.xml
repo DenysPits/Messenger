@@ -15,4 +15,6 @@
     <string name="enter_user_tag">Enter user\'s tag</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="tag_is_occupied">This tag is occupied by another user. Come up with another one</string>
+    <string name="message">Message</string>
+    <string name="send_or_attach_button">Send or attach button</string>
 </resources>

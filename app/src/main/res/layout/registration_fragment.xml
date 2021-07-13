@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/what_to_do"
-                android:textColor="?plainTextColor"
+                android:textColor="?plainTextColor2"
                 app:layout_constraintTop_toBottomOf="@id/your_info"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

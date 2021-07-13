@@ -7,7 +7,7 @@ import com.example.messenger.model.repository.UserRepository
 
 class ChatPreviewsViewModel(
     private val userRepository: UserRepository,
-    private val messageRepository: MessageRepository
+    messageRepository: MessageRepository
 ) : ViewModel() {
 
     private val _chatPreviews = MutableLiveData<MutableList<ChatPreview>>(mutableListOf())
@@ -34,6 +34,7 @@ class ChatPreviewsViewModel(
                     chatPreview = ChatPreview(user.id, user.name, "No messages yet", -1, user.avatar)
                 }
                 _chatPreviews.value?.add(chatPreview!!)
+                _chatPreviews.value = _chatPreviews.value
             }
         }
     }

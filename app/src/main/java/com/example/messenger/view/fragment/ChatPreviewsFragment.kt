@@ -1,17 +1,16 @@
 package com.example.messenger.view.fragment
 
-import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
@@ -30,9 +29,10 @@ class ChatPreviewsFragment : Fragment() {
         val application = activity?.application as MessengerApplication
         ChatPreviewsViewModelFactory(application.userRepository, application.messageRepository)
     }
-    private lateinit var fabMainAnimator: ObjectAnimator
-    private lateinit var alphaPanelAnimator: ObjectAnimator
-    private lateinit var fabRotateAnimator: ObjectAnimator
+    lateinit var fabMainAnimator: ObjectAnimator
+    lateinit var alphaPanelAnimator: ObjectAnimator
+    lateinit var fabRotateAnimator: ObjectAnimator
+    var isReverse = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,55 +85,46 @@ class ChatPreviewsFragment : Fragment() {
         viewModel.messages.value = null
     }
 
+    @SuppressLint("Recycle")
     private fun initAnimators() {
         val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, 0.73f)
         val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f, 0.73f)
         val elevation = PropertyValuesHolder.ofFloat("elevation", 6f, 0f)
         fabMainAnimator = ObjectAnimator.ofPropertyValuesHolder(binding.floatingActionButton, scaleX, scaleY, elevation)
+        fabRotateAnimator = ObjectAnimator.ofFloat(binding.floatingActionButton, View.ROTATION, 0f, -45f)
         alphaPanelAnimator = ObjectAnimator.ofFloat(binding.findUserPanel, View.ALPHA, 0f, 1f)
         alphaPanelAnimator.duration = 400
-        fabRotateAnimator = ObjectAnimator.ofFloat(binding.floatingActionButton, View.ROTATION, 0f, -45f)
+        alphaPanelAnimator.doOnEnd {
+            if (isReverse) {
+                binding.findUserPanel.visibility = View.GONE
+                binding.enteredTag.text.clear()
+            }
+        }
     }
 
     private fun addTextChangeListener() {
         val editText = binding.enteredTag
-        editText.addTextChangedListener (object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        editText.doOnTextChanged { text, _, before, _ ->
+            val textString = text.toString()
+            if (before == 0 && textString.isNotEmpty()) {
+                fabRotateAnimator.reverse()
+            } else if (before > 0 && textString.isEmpty() && binding.findUserPanel.isVisible) {
+                fabRotateAnimator.start()
             }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val text = s.toString()
-                if (before == 0 && text.isNotEmpty()) {
-                    fabRotateAnimator.reverse()
-                } else if (before > 0 && text.isEmpty() && binding.findUserPanel.isVisible) {
-                    fabRotateAnimator.start()
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-            }
-        })
+        }
     }
 
     private fun animateFindUserPanel() {
-        val findUserPanel = binding.findUserPanel
         val editText = binding.enteredTag
-        val animatorSet = AnimatorSet()
-        animatorSet.playTogether(fabMainAnimator, alphaPanelAnimator)
-        var isReverse = false
-        alphaPanelAnimator.doOnEnd {
-            if (isReverse) {
-                findUserPanel.visibility = View.GONE
-                binding.enteredTag.text.clear()
-            }
-        }
+        val findUserPanel = binding.findUserPanel
         if (!findUserPanel.isVisible) {
             isReverse = false
             findUserPanel.visibility = View.VISIBLE
             if (editText.text.isEmpty()) {
                 fabRotateAnimator.start()
             }
-            animatorSet.start()
+            alphaPanelAnimator.start()
+            fabMainAnimator.start()
         } else {
             isReverse = true
             addNewChat()
