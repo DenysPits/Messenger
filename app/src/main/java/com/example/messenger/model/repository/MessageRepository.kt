@@ -5,7 +5,8 @@ import com.example.messenger.model.entity.Message
 import kotlinx.coroutines.flow.Flow
 
 class MessageRepository(private val messageDao: MessageDao) {
-    fun getLastMessages(): Flow<List<Message>> {
-        return messageDao.getLastMessages()
+
+    fun getMessagesWithCompanion(companionId: Long): Flow<List<Message>> {
+        return messageDao.getMessagesWithCompanion(companionId)
     }
 }

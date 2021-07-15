@@ -52,24 +52,7 @@ class ChatPreviewsFragment : Fragment() {
         val adapter = ChatPreviewsAdapter()
         binding.recyclerView.adapter = adapter
         viewModel.chatPreviews.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
-        var areUsersReady = false
-        var areMessagesReady = false
-
-        fun restorePreviewsIfReady() {
-            if (areMessagesReady && areUsersReady) {
-                viewModel.restorePreviews()
-            }
-        }
-
-        viewModel.users.observe(viewLifecycleOwner) {
-            areUsersReady = true
-            restorePreviewsIfReady()
-        }
-        viewModel.messages.observe(viewLifecycleOwner) {
-            areMessagesReady = true
-            restorePreviewsIfReady()
+            adapter.submitList(it.toList())
         }
 
         initAnimators()
@@ -77,12 +60,6 @@ class ChatPreviewsFragment : Fragment() {
         binding.floatingActionButton.setOnClickListener {
             animateFindUserPanel()
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        viewModel.users.value = null
-        viewModel.messages.value = null
     }
 
     @SuppressLint("Recycle")

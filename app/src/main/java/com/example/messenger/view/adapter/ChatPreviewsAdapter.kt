@@ -2,12 +2,14 @@ package com.example.messenger.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.databinding.ChatPreviewItemBinding
 import com.example.messenger.model.entity.ChatPreview
 import com.example.messenger.utils.Coder
+import com.example.messenger.view.fragment.ChatPreviewsFragmentDirections
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -36,7 +38,12 @@ class ChatPreviewsAdapter :
         )
 
     override fun onBindViewHolder(holder: ChatPreviewsViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val item = getItem(position)
+        holder.itemView.setOnClickListener {
+            val action = ChatPreviewsFragmentDirections.actionChatPreviewsFragmentToChatFragment(item.userId)
+            holder.itemView.findNavController().navigate(action)
+        }
+        holder.bind(item)
     }
 
     class ChatPreviewsViewHolder(
@@ -45,11 +52,11 @@ class ChatPreviewsAdapter :
         fun bind(chatPreview: ChatPreview) {
             binding.apply {
                 userName.text = chatPreview.name
-                message.text = chatPreview.message
+                message.text = chatPreview.message ?: "No messages yet"
                 val simpleDateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-                val time = chatPreview.time
+                val time = chatPreview.time ?: -1
                 this.time.text =
-                    if (time > 0) simpleDateFormat.format(Date(chatPreview.time)) else ""
+                    if (time > 0) simpleDateFormat.format(Date(time)) else ""
                 if (chatPreview.avatar.isEmpty()) {
                     avatarLetter.text = chatPreview.name.take(1).uppercase(Locale.getDefault())
                 } else {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Widget.Messenger.Toolbar.Primary" parent="Widget.MaterialComponents.Toolbar.Primary">
         <item name="android:background">?appBarBackgroundColor</item>
         <item name="titleTextColor">?appBarForegroundColor</item>
@@ -18,17 +18,7 @@
         <item name="android:textColorHighlight">?textHighlightColor</item>
     </style>
 
-    <style name="MyMessage">
-        <item name="messageBackground">@drawable/my_message_shape</item>
-        <item name="messageBias">0.99</item>
-        <item name="messageTextColor">?white</item>
-        <item name="messageTimeColor">?myMessageTimeColor</item>
-    </style>
-
-    <style name="CompanionMessage">
-        <item name="messageBackground">@drawable/companion_message_shape</item>
-        <item name="messageBias">0.01</item>
-        <item name="messageTextColor">?plainTextColor</item>
-        <item name="messageTimeColor">?companionMessageTimeColor</item>
+    <style name="RecyclerViewEdges">
+        <item name="android:colorEdgeEffect" tools:ignore="NewApi">?blue</item>
     </style>
 </resources>

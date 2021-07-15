@@ -7,8 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MessageDao {
-    @Query(
-        "SELECT o.* FROM messages o INNER JOIN (SELECT companion_id, MAX(time) AS MaxTime FROM messages GROUP BY companion_id) og ON o.companion_id = og.companion_id AND o.time = og.MaxTime"
-    )
-    fun getLastMessages(): Flow<List<Message>>
+
+    @Query("SELECT * FROM messages WHERE companion_id=:companionId")
+    fun getMessagesWithCompanion(companionId: Long): Flow<List<Message>>
 }
