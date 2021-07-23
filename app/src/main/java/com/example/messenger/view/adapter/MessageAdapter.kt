@@ -54,7 +54,7 @@ class MessageAdapter :
             binding.apply {
                 text.text = message.text
                 val simpleDateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-                time.text = simpleDateFormat.format(Date(message.time))
+                time.text = simpleDateFormat.format(Date(message.time ?: -1))
                 val typedArray = binding.root.context.theme.obtainStyledAttributes(
                     intArrayOf(
                         R.attr.white,

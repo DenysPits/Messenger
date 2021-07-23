@@ -2,9 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:width="24dp"
     android:height="24dp"
+    android:tint="?attr/attachButtonColor"
     android:viewportWidth="432.671"
     android:viewportHeight="432.671"
-    android:tint="?attr/attachButtonColor"
     tools:ignore="VectorRaster">
     <path
         android:fillColor="#000000"

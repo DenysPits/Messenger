@@ -3,10 +3,12 @@ package com.example.messenger.view.fragment
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
@@ -20,19 +22,33 @@ import com.example.messenger.model.repository.UserNotFoundException
 import com.example.messenger.view.adapter.ChatPreviewsAdapter
 import com.example.messenger.viewmodel.ChatPreviewsViewModel
 import com.example.messenger.viewmodel.ChatPreviewsViewModelFactory
+import com.example.messenger.viewmodel.NetworkCheckViewModel
+import com.example.messenger.viewmodel.NetworkCheckViewModelFactory
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ChatPreviewsFragment : Fragment() {
 
     private lateinit var binding: ChatPreviewsFragmentBinding
+    private val networkCheckViewModel: NetworkCheckViewModel by viewModels {
+        val application = activity?.application as MessengerApplication
+        NetworkCheckViewModelFactory(
+            application.userRepository,
+            application.messageRepository,
+        )
+    }
     private val viewModel: ChatPreviewsViewModel by viewModels {
         val application = activity?.application as MessengerApplication
-        ChatPreviewsViewModelFactory(application.userRepository, application.messageRepository)
+        ChatPreviewsViewModelFactory(
+            application.userRepository,
+            application.chatPreviewsRepository
+        )
     }
-    lateinit var fabMainAnimator: ObjectAnimator
-    lateinit var alphaPanelAnimator: ObjectAnimator
-    lateinit var fabRotateAnimator: ObjectAnimator
-    var isReverse = false
+    private lateinit var fabMainAnimator: ObjectAnimator
+    private lateinit var alphaPanelAnimator: ObjectAnimator
+    private lateinit var fabRotateAnimator: ObjectAnimator
+    private var isReverse = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,9 +68,9 @@ class ChatPreviewsFragment : Fragment() {
         val adapter = ChatPreviewsAdapter()
         binding.recyclerView.adapter = adapter
         viewModel.chatPreviews.observe(viewLifecycleOwner) {
-            adapter.submitList(it.toList())
+            adapter.submitList(it.sortedByDescending { chatPreview -> chatPreview.time })
         }
-
+        networkCheckViewModel.checkNewMessages()
         initAnimators()
         addTextChangeListener()
         binding.floatingActionButton.setOnClickListener {
@@ -67,8 +83,14 @@ class ChatPreviewsFragment : Fragment() {
         val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, 0.73f)
         val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f, 0.73f)
         val elevation = PropertyValuesHolder.ofFloat("elevation", 6f, 0f)
-        fabMainAnimator = ObjectAnimator.ofPropertyValuesHolder(binding.floatingActionButton, scaleX, scaleY, elevation)
-        fabRotateAnimator = ObjectAnimator.ofFloat(binding.floatingActionButton, View.ROTATION, 0f, -45f)
+        fabMainAnimator = ObjectAnimator.ofPropertyValuesHolder(
+            binding.floatingActionButton,
+            scaleX,
+            scaleY,
+            elevation
+        )
+        fabRotateAnimator =
+            ObjectAnimator.ofFloat(binding.floatingActionButton, View.ROTATION, 0f, -45f)
         alphaPanelAnimator = ObjectAnimator.ofFloat(binding.findUserPanel, View.ALPHA, 0f, 1f)
         alphaPanelAnimator.duration = 400
         alphaPanelAnimator.doOnEnd {
@@ -92,6 +114,10 @@ class ChatPreviewsFragment : Fragment() {
     }
 
     private fun animateFindUserPanel() {
+        val imm: InputMethodManager? =
+            activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        imm?.hideSoftInputFromWindow(binding.root.windowToken, 0)
+
         val editText = binding.enteredTag
         val findUserPanel = binding.findUserPanel
         if (!findUserPanel.isVisible) {
@@ -117,11 +143,18 @@ class ChatPreviewsFragment : Fragment() {
         viewModel.viewModelScope.launch {
             try {
                 if (binding.enteredTag.text.toString().isNotBlank()) {
-                    viewModel.addNewChat(binding.enteredTag.text.toString())
+                    withContext(Dispatchers.IO) {
+                        viewModel.addNewUser(binding.enteredTag.text.toString())
+                    }
                 }
             } catch (e: UserNotFoundException) {
                 Toast.makeText(context, "User not found", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        networkCheckViewModel.stopCheckingMessages()
     }
 }

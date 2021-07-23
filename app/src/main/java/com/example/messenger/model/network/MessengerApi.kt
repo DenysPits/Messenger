@@ -8,9 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 object MessengerApi {
-    private const val BASE_URL = "http://3.142.181.116:8000/api/"
-    //private const val BASE_URL = "http://localhost:8000/api"
 
+    private const val BASE_URL = "http://3.142.181.116:8000/api/"
     private lateinit var retrofit: Retrofit
 
     val retrofitService: MessengerApiService by lazy {

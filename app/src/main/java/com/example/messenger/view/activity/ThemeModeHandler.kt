@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
 
 class ThemeModeHandler(private val sharedPreferences: SharedPreferences) {
+
     private val key = "themeMode"
 
     fun restoreThemeMode() {

@@ -5,22 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?backgroundMainColor"
-    android:paddingTop="7dp"
     tools:context=".view.fragment.ChatFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:theme="@style/RecyclerViewEdges"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
+        android:paddingTop="7dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/message_item"
-        tools:itemCount="20"
+        app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/message_input_line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="15"
+        tools:listitem="@layout/message_item" />
 
     <View
         android:id="@+id/message_input_line"
@@ -35,9 +35,9 @@
         android:id="@+id/message_input_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?messageInputPanelBackground"
         android:paddingStart="18dp"
         android:paddingEnd="5dp"
-        android:background="?messageInputPanelBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,9 +54,9 @@
             android:importantForAutofill="no"
             android:inputType="textCapSentences"
             android:textColor="?plainTextColor"
-            android:theme="@style/EditTextChatTheme"
             android:textColorHint="?placeholderColor"
             android:textSize="18sp"
+            android:theme="@style/EditTextChatTheme"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/send_attach_button"
             app:layout_constraintStart_toStartOf="parent"
@@ -77,5 +77,4 @@
             tools:ignore="VectorDrawableCompat" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,15 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.messenger.model.db.dao.ChatPreviewsDao
 import com.example.messenger.model.db.dao.MessageDao
 import com.example.messenger.model.db.dao.UserDao
 import com.example.messenger.model.entity.Message
 import com.example.messenger.model.entity.User
 
-@Database(entities = [Message::class, User::class], version = 5, exportSchema = false)
+@Database(entities = [Message::class, User::class], version = 9, exportSchema = false)
 abstract class MessengerDatabase : RoomDatabase() {
+
     abstract fun userDao(): UserDao
     abstract fun messageDao(): MessageDao
+    abstract fun chatPreviewsDao(): ChatPreviewsDao
 
     companion object {
         @Volatile

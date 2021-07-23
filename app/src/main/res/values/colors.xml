@@ -1,28 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="blue">#52a2e9</color> // my message background, buttons
-    <color name="grey">#8c8d8f</color> // message text preview, message time
-    <color name="grey2">#8e959b</color> // send button
-    <color name="grey3">#a3acb3</color> // placeholder
-    <color name="grey_light">#f0f0f0</color> companion message background
+    // my message background, buttons
+    <color name="blue">#52a2e9</color>
+    // message text preview, message time
+    <color name="grey">#8c8d8f</color>
+    // send button
+    <color name="grey2">#8e959b</color>
+    // placeholder
+    <color name="grey3">#a3acb3</color>
+    // companion message background
+    <color name="grey_light">#f0f0f0</color>
     <color name="blue_gloomy">#426382</color>
     <color name="grey_dark">#333333</color>
-    <color name="grey_light2">#cfcfcf</color> // highlight
-    <color name="grey_light3">#e6e6e6</color> // line
-    
-    <color name="blue_ultra_dark">#1a242e</color> // status bar
-    <color name="blue_dark">#212d3b</color> // app bar background, companion message background
-    <color name="blue_dark2">#1d2733</color> // background
-    <color name="grey4">#6a7c90</color> // placeholder
-    <color name="grey5">#6b7a8d</color> // send button
-    <color name="grey6">#74828f</color> // message time
-    <color name="blue_light">#90bcdf</color> // message time
-    <color name="blue2">#50a7ea</color> // button
-    <color name="grey_blue">#7d8b98</color> // message text preview
-    <color name="grey_blue2">#757f8b</color> // message time preview
-    <color name="white2">#fafafa</color> // all but not top panel
-    <color name="blue_slightly_dark">#3e6189</color> // my message background
-    <color name="grey7">#454c56</color> // highlight
+    // highlight
+    <color name="grey_light2">#cfcfcf</color>
+    // line
+    <color name="grey_light3">#e6e6e6</color>
+
+
+    // status bar
+    <color name="blue_ultra_dark">#1a242e</color>
+    // app bar background, companion message background
+    <color name="blue_dark">#212d3b</color>
+    // background
+    <color name="blue_dark2">#1d2733</color>
+    // placeholder
+    <color name="grey4">#6a7c90</color>
+    // send button
+    <color name="grey5">#6b7a8d</color>
+    // message time
+    <color name="grey6">#74828f</color>
+    // message time
+    <color name="blue_light">#90bcdf</color>
+    // button
+    <color name="blue2">#50a7ea</color>
+    // message text preview
+    <color name="grey_blue">#7d8b98</color>
+    // message time preview
+    <color name="grey_blue2">#757f8b</color>
+    // all but not top panel
+    <color name="white2">#fafafa</color>
+    // my message background
+    <color name="blue_slightly_dark">#3e6189</color>
+    // highlight
+    <color name="grey7">#454c56</color>
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>

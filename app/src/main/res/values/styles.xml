@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Widget.Messenger.Toolbar.Primary" parent="Widget.MaterialComponents.Toolbar.Primary">
-        <item name="android:background">?appBarBackgroundColor</item>
-        <item name="titleTextColor">?appBarForegroundColor</item>
+<resources>
+
+    <style name="NavigationArrow" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="colorOnPrimary">?appBarForegroundColor</item>
     </style>
 
     <style name="MyEditTextTheme">
@@ -11,14 +11,15 @@
         <item name="android:textColorHighlight">?textHighlightColor</item>
         <item name="android:textColorHint">?placeholderColor</item>
         <item name="android:paddingBottom">18dp</item>
+        <item name="editTextStyle">@style/MyEditTextStyle</item>
+    </style>
+
+    <style name="MyEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">?plainTextColor</item>>
     </style>
 
     <style name="EditTextChatTheme">
         <item name="colorControlActivated">?blue</item>
         <item name="android:textColorHighlight">?textHighlightColor</item>
-    </style>
-
-    <style name="RecyclerViewEdges">
-        <item name="android:colorEdgeEffect" tools:ignore="NewApi">?blue</item>
     </style>
 </resources>

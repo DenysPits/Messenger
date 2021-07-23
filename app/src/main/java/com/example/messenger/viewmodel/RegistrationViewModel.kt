@@ -1,6 +1,5 @@
 package com.example.messenger.viewmodel
 
-import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.messenger.model.entity.User
@@ -8,7 +7,7 @@ import com.example.messenger.model.repository.UserRepository
 import kotlinx.coroutines.runBlocking
 
 class RegistrationViewModel(private val repository: UserRepository) : ViewModel() {
-    lateinit var avatarUri: Uri
+    lateinit var avatar: String
 
     suspend fun saveUser(name: String, tag: String, avatar: String) {
         if (validateUserInput(name, tag)) {
@@ -24,7 +23,7 @@ class RegistrationViewModel(private val repository: UserRepository) : ViewModel(
         return !(name.isBlank() || tag.isBlank() || name.length > 30 || tag.length > 30)
     }
 
-    fun isAvatarSelected() = ::avatarUri.isInitialized
+    fun isAvatarSelected() = ::avatar.isInitialized
 }
 
 class RegistrationViewModelFactory(private val repository: UserRepository) :
