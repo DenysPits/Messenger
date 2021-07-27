@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,11 +20,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.messenger.MessengerApplication
 import com.example.messenger.databinding.ChatPreviewsFragmentBinding
 import com.example.messenger.model.repository.UserNotFoundException
+import com.example.messenger.view.NetworkCheckingService
 import com.example.messenger.view.adapter.ChatPreviewsAdapter
 import com.example.messenger.viewmodel.ChatPreviewsViewModel
 import com.example.messenger.viewmodel.ChatPreviewsViewModelFactory
-import com.example.messenger.viewmodel.NetworkCheckViewModel
-import com.example.messenger.viewmodel.NetworkCheckViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -31,13 +31,6 @@ import kotlinx.coroutines.withContext
 class ChatPreviewsFragment : Fragment() {
 
     private lateinit var binding: ChatPreviewsFragmentBinding
-    private val networkCheckViewModel: NetworkCheckViewModel by viewModels {
-        val application = activity?.application as MessengerApplication
-        NetworkCheckViewModelFactory(
-            application.userRepository,
-            application.messageRepository,
-        )
-    }
     private val viewModel: ChatPreviewsViewModel by viewModels {
         val application = activity?.application as MessengerApplication
         ChatPreviewsViewModelFactory(
@@ -70,12 +63,23 @@ class ChatPreviewsFragment : Fragment() {
         viewModel.chatPreviews.observe(viewLifecycleOwner) {
             adapter.submitList(it.sortedByDescending { chatPreview -> chatPreview.time })
         }
-        networkCheckViewModel.checkNewMessages()
+        val intent = Intent(context, NetworkCheckingService::class.java)
+        requireActivity().startService(intent)
         initAnimators()
         addTextChangeListener()
         binding.floatingActionButton.setOnClickListener {
             animateFindUserPanel()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        NetworkCheckingService.isReadyToSendNotifications = false
+    }
+
+    override fun onStop() {
+        super.onStop()
+        NetworkCheckingService.isReadyToSendNotifications = true
     }
 
     @SuppressLint("Recycle")
@@ -151,10 +155,5 @@ class ChatPreviewsFragment : Fragment() {
                 Toast.makeText(context, "User not found", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        networkCheckViewModel.stopCheckingMessages()
     }
 }

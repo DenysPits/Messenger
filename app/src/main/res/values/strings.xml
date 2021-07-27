@@ -22,4 +22,6 @@
     <string name="save_changes">Save changes</string>
     <string name="profile_updated">Your profile has been updated</string>
     <string name="avatar">Avatar</string>
+    <string name="message_notification_channel_id">message_channel</string>
+    <string name="message_notification_channel_name">Message</string>
 </resources>

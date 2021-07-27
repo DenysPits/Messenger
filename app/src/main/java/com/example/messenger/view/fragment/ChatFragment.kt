@@ -17,11 +17,11 @@ import com.example.messenger.R
 import com.example.messenger.databinding.ChatFragmentBinding
 import com.example.messenger.databinding.ChatToolbarBinding
 import com.example.messenger.utils.ImageHandler
+import com.example.messenger.utils.NotificationHandler
+import com.example.messenger.view.NetworkCheckingService
 import com.example.messenger.view.adapter.MessageAdapter
 import com.example.messenger.viewmodel.ChatViewModel
 import com.example.messenger.viewmodel.ChatViewModelFactory
-import com.example.messenger.viewmodel.NetworkCheckViewModel
-import com.example.messenger.viewmodel.NetworkCheckViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -32,13 +32,6 @@ class ChatFragment : Fragment() {
     private lateinit var binding: ChatFragmentBinding
     private lateinit var toolbarBinding: ChatToolbarBinding
     private val navigationArgs: ChatFragmentArgs by navArgs()
-    private val networkCheckViewModel: NetworkCheckViewModel by viewModels {
-        val application = activity?.application as MessengerApplication
-        NetworkCheckViewModelFactory(
-            application.userRepository,
-            application.messageRepository,
-        )
-    }
     private val viewModel: ChatViewModel by viewModels {
         val application = activity?.application as MessengerApplication
         ChatViewModelFactory(
@@ -78,20 +71,16 @@ class ChatFragment : Fragment() {
                 recyclerView.scrollToPosition(it.size - 1)
             }
         }
-        viewModel.companionName.observe(viewLifecycleOwner) {
-            toolbarBinding.name.text = it
-        }
-        viewModel.companionAvatar.observe(viewLifecycleOwner) { avatar ->
-            if (avatar.isEmpty()) {
-                viewModel.companionName.observe(viewLifecycleOwner) {
-                    val firstLetterOfName = it.take(1).uppercase(Locale.getDefault())
-                    toolbarBinding.avatarLetter.text = firstLetterOfName
-                }
+        viewModel.companion.observe(viewLifecycleOwner) { companion ->
+            toolbarBinding.name.text = companion.name
+            if (companion.avatar.isEmpty()) {
+                val firstLetterOfName = companion.name.take(1).uppercase(Locale.getDefault())
+                toolbarBinding.avatarLetter.text = firstLetterOfName
             } else {
                 viewModel.viewModelScope.launch {
                     val bitmap: Bitmap
                     withContext(Dispatchers.IO) {
-                        bitmap = ImageHandler.loadBitmapFromStorage(avatar)
+                        bitmap = ImageHandler.loadBitmapFromStorage(companion.avatar)
                     }
                     toolbarBinding.avatar.setImageBitmap(bitmap)
                 }
@@ -103,7 +92,6 @@ class ChatFragment : Fragment() {
                 v.scrollBy(0, dy)
             }
         }
-        networkCheckViewModel.checkNewMessages()
         addButtonAnimation()
         binding.sendAttachButton.setOnClickListener {
             if (isButtonForSending) {
@@ -116,6 +104,30 @@ class ChatFragment : Fragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        NotificationHandler.cancelNotification(navigationArgs.companionId)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        NetworkCheckingService.forbiddenIdToSend = navigationArgs.companionId
+    }
+
+    override fun onPause() {
+        super.onPause()
+        NetworkCheckingService.forbiddenIdToSend = null
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        requireActivity().findViewById<Toolbar>(R.id.toolbar).apply {
+            val image = findViewById<View>(R.id.avatar_card)
+            val name = findViewById<View>(R.id.name)
+            removeView(image)
+            removeView(name)
+        }
+    }
 
     private fun addButtonAnimation() {
         val button = binding.sendAttachButton
@@ -146,21 +158,6 @@ class ChatFragment : Fragment() {
                 isEditTextEmpty = true
                 buttonDisappearAnimator.start()
             }
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        networkCheckViewModel.stopCheckingMessages()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        requireActivity().findViewById<Toolbar>(R.id.toolbar).apply {
-            val image = findViewById<View>(R.id.avatar_card)
-            val name = findViewById<View>(R.id.name)
-            removeView(image)
-            removeView(name)
         }
     }
 }

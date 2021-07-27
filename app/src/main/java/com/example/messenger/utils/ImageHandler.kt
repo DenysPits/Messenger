@@ -23,6 +23,7 @@ object ImageHandler {
             byteArrayOutputStream.reset()
             options -= 10
             bitmap?.compress(Bitmap.CompressFormat.JPEG, options, byteArrayOutputStream)
+            if (options == 0) break
         }
         val imageBytes = byteArrayOutputStream.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)

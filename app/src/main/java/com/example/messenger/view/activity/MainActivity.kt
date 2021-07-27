@@ -14,6 +14,7 @@ import androidx.navigation.ui.NavigationUI
 import com.example.messenger.R
 import com.example.messenger.view.fragment.ChatPreviewsFragmentDirections
 
+const val COMPANION_TO_NAVIGATE = "companionId"
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,6 +37,11 @@ class MainActivity : AppCompatActivity() {
             )
             .build()
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
+        val companionId = intent.getLongExtra(COMPANION_TO_NAVIGATE, -1)
+        if (companionId != -1L) {
+            val action = ChatPreviewsFragmentDirections.actionChatPreviewsFragmentToChatFragment(companionId)
+            navController.navigate(action)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

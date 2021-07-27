@@ -25,9 +25,6 @@ interface UserDao {
     @Query("SELECT * FROM users WHERE is_my_user=1 LIMIT 1")
     fun getMyUser(): Flow<User>
 
-    @Query("SELECT name FROM users WHERE id=:id")
-    fun getUserName(id: Long): Flow<String>
-
-    @Query("SELECT avatar FROM users WHERE id=:id")
-    fun getUserAvatar(id: Long): Flow<String>
+    @Query("SELECT * FROM users WHERE id=:id")
+    fun getUser(id: Long): Flow<User>
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.example.messenger.model.entity.Message
 import com.example.messenger.model.entity.MessageAction
+import com.example.messenger.model.entity.User
 import com.example.messenger.model.repository.MessageRepository
 import com.example.messenger.model.repository.UserRepository
 
@@ -17,8 +18,7 @@ class ChatViewModel(
 
     val messages: LiveData<List<Message>> =
         messageRepository.getMessagesWithCompanion(companionId).asLiveData()
-    val companionName: LiveData<String> = userRepository.getUserName(companionId).asLiveData()
-    val companionAvatar: LiveData<String> = userRepository.getUserAvatar(companionId).asLiveData()
+    val companion: LiveData<User> = userRepository.getUser(companionId).asLiveData()
 
     suspend fun sendMessage(companionId: Long, text: String) {
         val myId = userRepository.getMyId()

@@ -78,11 +78,7 @@ class UserRepository(private val userDao: UserDao) {
 
     suspend fun getMyId(): Long = userDao.getMyId()
 
-    fun getUserName(id: Long): Flow<String> {
-        return userDao.getUserName(id)
-    }
-
-    fun getUserAvatar(id: Long): Flow<String> {
-        return userDao.getUserAvatar(id)
+    fun getUser(id: Long): Flow<User> {
+        return userDao.getUser(id)
     }
 }
