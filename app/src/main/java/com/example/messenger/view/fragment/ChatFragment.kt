@@ -22,6 +22,8 @@ import com.example.messenger.view.NetworkCheckingService
 import com.example.messenger.view.adapter.MessageAdapter
 import com.example.messenger.viewmodel.ChatViewModel
 import com.example.messenger.viewmodel.ChatViewModelFactory
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -66,12 +68,12 @@ class ChatFragment : Fragment() {
         val recyclerView = binding.recyclerView
         val adapter = MessageAdapter()
         recyclerView.adapter = adapter
-        viewModel.messages.observe(viewLifecycleOwner) {
-            adapter.submitList(it) {
-                recyclerView.scrollToPosition(it.size - 1)
+        viewModel.messages.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe { messages ->
+            adapter.submitList(messages) {
+                recyclerView.scrollToPosition(messages.size - 1)
             }
         }
-        viewModel.companion.observe(viewLifecycleOwner) { companion ->
+        viewModel.companion.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe { companion ->
             toolbarBinding.name.text = companion.name
             if (companion.avatar.isEmpty()) {
                 val firstLetterOfName = companion.name.take(1).uppercase(Locale.getDefault())

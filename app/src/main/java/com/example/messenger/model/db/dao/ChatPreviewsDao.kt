@@ -3,7 +3,7 @@ package com.example.messenger.model.db.dao
 import androidx.room.Dao
 import androidx.room.Query
 import com.example.messenger.model.entity.ChatPreview
-import kotlinx.coroutines.flow.Flow
+import io.reactivex.rxjava3.core.Observable
 
 @Dao
 interface ChatPreviewsDao {
@@ -19,5 +19,5 @@ interface ChatPreviewsDao {
         LEFT JOIN messages ON users.id=messages.companion_id
         WHERE is_my_user = 0 AND message IS NULL"""
     )
-    fun getChatPreviews(): Flow<List<ChatPreview>>
+    fun getChatPreviews(): Observable<List<ChatPreview>>
 }

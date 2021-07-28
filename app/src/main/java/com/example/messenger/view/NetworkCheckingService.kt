@@ -2,7 +2,6 @@ package com.example.messenger.view
 
 import android.content.Intent
 import androidx.lifecycle.LifecycleService
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import com.example.messenger.MessengerApplication
 import com.example.messenger.R
@@ -12,6 +11,8 @@ import com.example.messenger.model.entity.changeBase64ToPath
 import com.example.messenger.model.repository.MessageRepository
 import com.example.messenger.model.repository.UserRepository
 import com.example.messenger.utils.NotificationHandler
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.*
 import java.net.SocketTimeoutException
 
@@ -95,9 +96,9 @@ class NetworkCheckingService : LifecycleService() {
         companionId: Long,
         message: Message
     ) {
-        val user = userRepository.getUser(companionId).asLiveData()
+        val user = userRepository.getUser(companionId)
         withContext(Dispatchers.Main) {
-            user.observe(this@NetworkCheckingService) { user ->
+            user.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe { user ->
                 if (user != null) {
                     NotificationHandler.sendNotification(
                         companionId,

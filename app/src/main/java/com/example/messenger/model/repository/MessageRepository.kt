@@ -6,7 +6,7 @@ import com.example.messenger.model.entity.toMessageForSerialization
 import com.example.messenger.model.network.MessengerApi
 import com.example.messenger.model.network.status.Status
 import com.example.messenger.model.network.status.StatusResponse
-import kotlinx.coroutines.flow.Flow
+import io.reactivex.rxjava3.core.Observable
 
 class MessageRepository(private val messageDao: MessageDao) {
 
@@ -16,7 +16,7 @@ class MessageRepository(private val messageDao: MessageDao) {
         return retrofitService.getMessages(id, deleteFromServer)
     }
 
-    fun getMessagesWithCompanion(companionId: Long): Flow<List<Message>> {
+    fun getMessagesWithCompanion(companionId: Long): Observable<List<Message>> {
         return messageDao.getMessagesWithCompanion(companionId)
     }
 

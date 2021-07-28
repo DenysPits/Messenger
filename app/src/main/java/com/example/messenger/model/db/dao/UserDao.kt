@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.messenger.model.entity.User
-import kotlinx.coroutines.flow.Flow
+import io.reactivex.rxjava3.core.Observable
 
 @Dao
 interface UserDao {
@@ -23,8 +23,8 @@ interface UserDao {
     suspend fun getMyId(): Long
 
     @Query("SELECT * FROM users WHERE is_my_user=1 LIMIT 1")
-    fun getMyUser(): Flow<User>
+    fun getMyUser(): Observable<User>
 
     @Query("SELECT * FROM users WHERE id=:id")
-    fun getUser(id: Long): Flow<User>
+    fun getUser(id: Long): Observable<User>
 }

@@ -24,6 +24,8 @@ import com.example.messenger.view.NetworkCheckingService
 import com.example.messenger.view.adapter.ChatPreviewsAdapter
 import com.example.messenger.viewmodel.ChatPreviewsViewModel
 import com.example.messenger.viewmodel.ChatPreviewsViewModelFactory
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -60,8 +62,8 @@ class ChatPreviewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapter = ChatPreviewsAdapter()
         binding.recyclerView.adapter = adapter
-        viewModel.chatPreviews.observe(viewLifecycleOwner) {
-            adapter.submitList(it.sortedByDescending { chatPreview -> chatPreview.time })
+        viewModel.chatPreviews.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe { chatPreviews ->
+            adapter.submitList(chatPreviews.sortedByDescending { chatPreview -> chatPreview.time })
         }
         val intent = Intent(context, NetworkCheckingService::class.java)
         requireActivity().startService(intent)

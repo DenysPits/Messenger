@@ -3,7 +3,6 @@ package com.example.messenger.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
 import com.example.messenger.model.entity.changeBase64ToPath
 import com.example.messenger.model.repository.ChatPreviewsRepository
 import com.example.messenger.model.repository.UserRepository
@@ -13,7 +12,7 @@ class ChatPreviewsViewModel(
     chatPreviewsRepository: ChatPreviewsRepository
 ) : ViewModel() {
 
-    val chatPreviews = chatPreviewsRepository.getChatPreviews().asLiveData()
+    val chatPreviews = chatPreviewsRepository.getChatPreviews()
 
     suspend fun addNewUser(tag: String) {
         var time1 = System.currentTimeMillis()

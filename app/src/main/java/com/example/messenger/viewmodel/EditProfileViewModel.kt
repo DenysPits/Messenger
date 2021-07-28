@@ -1,9 +1,7 @@
 package com.example.messenger.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
 import com.example.messenger.model.entity.User
 import com.example.messenger.model.repository.UserRepository
 
@@ -12,7 +10,7 @@ class EditProfileViewModel(private val repository: UserRepository) : ViewModel()
     lateinit var name: String
     lateinit var tag: String
     lateinit var avatarUri: String
-    val user: LiveData<User> = repository.getMyUser().asLiveData()
+    val user = repository.getMyUser()
 
     suspend fun updateUser(name: String, tag: String, avatar: String) {
         if (validateUserInput(name, tag)) {

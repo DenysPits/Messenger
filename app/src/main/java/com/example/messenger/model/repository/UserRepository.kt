@@ -6,7 +6,7 @@ import com.example.messenger.model.entity.changeBase64ToPath
 import com.example.messenger.model.network.MessengerApi
 import com.example.messenger.model.network.status.Status
 import com.example.messenger.model.network.status.StatusResponse
-import kotlinx.coroutines.flow.Flow
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.Response
 import java.net.HttpURLConnection
 
@@ -65,7 +65,7 @@ class UserRepository(private val userDao: UserDao) {
         return validateResponse(response)
     }
 
-    fun getMyUser(): Flow<User> {
+    fun getMyUser(): Observable<User> {
         return userDao.getMyUser()
     }
 
@@ -78,7 +78,7 @@ class UserRepository(private val userDao: UserDao) {
 
     suspend fun getMyId(): Long = userDao.getMyId()
 
-    fun getUser(id: Long): Flow<User> {
+    fun getUser(id: Long): Observable<User> {
         return userDao.getUser(id)
     }
 }
