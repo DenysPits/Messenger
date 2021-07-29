@@ -10,11 +10,14 @@ Messenger is a simple messaging app with support for:
 ### Server 
 Github: https://github.com/DenysPits/OP-Messenger-Server
 ### Screenshots
-##### Main screen:
-![Main screen](./screenshots/main.jpg)
-##### Chat screen:
-![Chat screen](./screenshots/chat.jpg)
-##### Profile editing screen:
-![Profile editing screen](./screenshots/edit_profile.jpg)
-##### Notification:
-![Notification screen](./screenshots/notification.jpg)
+#### Main screen:
+<p><img src="./screenshots/main.jpg" width="400" /></p>
+
+#### Chat screen:
+<img src="./screenshots/chat.jpg" width="400" />
+
+#### Profile editing screen:
+<img src="./screenshots/edit_profile.jpg" width="400" />
+
+#### Notification:
+<img src="./screenshots/notification.jpg" width="400" />
