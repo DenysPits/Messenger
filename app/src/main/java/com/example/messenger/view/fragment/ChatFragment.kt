@@ -4,10 +4,11 @@ import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
 import androidx.appcompat.widget.Toolbar
 import androidx.core.animation.doOnEnd
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
@@ -151,15 +152,26 @@ class ChatFragment : Fragment() {
             buttonAppearAnimator.start()
         }
 
-        binding.messageEditText.doOnTextChanged { text, _, before, _ ->
-            val textString = text.toString()
-            if (before == 0 && textString.isNotEmpty()) {
-                isEditTextEmpty = false
-                buttonDisappearAnimator.start()
-            } else if (before > 0 && textString.isEmpty()) {
-                isEditTextEmpty = true
-                buttonDisappearAnimator.start()
+        binding.messageEditText.addTextChangedListener(object : TextWatcher {
+            var beforeLength: Int = -1
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                beforeLength = s.toString().length
             }
-        }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val textString = s.toString()
+                if (beforeLength == 0 && textString.isNotEmpty()) {
+                    isEditTextEmpty = false
+                    buttonDisappearAnimator.start()
+                } else if (beforeLength > 0 && textString.isEmpty()) {
+                    isEditTextEmpty = true
+                    buttonDisappearAnimator.start()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
     }
 }
